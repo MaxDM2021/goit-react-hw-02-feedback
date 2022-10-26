@@ -1,10 +1,10 @@
 
 import React from "react";
 
-const Value =({onValue}) => (
-<span className="Counter__value">{onValue}</span>
+const ValueGood =({onValueGood}) => (
+<p className="Counter__value">Good: {onValueGood}</p>
 )
 
-export default Value
+export default ValueGood 
 
 

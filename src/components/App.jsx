@@ -1,4 +1,5 @@
 import React from "react";
+import Feedback from "./Feedback";
 
 
 
@@ -14,10 +15,12 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
-
+<Feedback initialvalue={0}/>
 
 
     </div>
   );
 };
+
+
+

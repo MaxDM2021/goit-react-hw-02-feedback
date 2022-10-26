@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bottoms =({onIncrementGood, onIncrementNeutral, onIncrementBad }) => (
+const Bottoms =({onIncrementGood, onIncrementNeutral, onIncrementBad,}) => (
     <div className="Counter__controls">
     <button type="button" onClick={onIncrementGood}>
       Good
