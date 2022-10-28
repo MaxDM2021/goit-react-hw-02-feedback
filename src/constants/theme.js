@@ -14,7 +14,7 @@
 
     spacing: value => `${4 * value}px`,
 
-    space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+    space: [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 650, 1024],
     fonts: {
       body: 'system-ui, sans-serif',
       heading: 'system-ui, sans-serif',
@@ -46,6 +46,13 @@
      
       round: '50%',
     },
+
+    sizes:  {
+     small: '300px',
+     normal: '600px',
+     large: '700px',
+     auto: 'auto',    
+    }
 
 
   });
