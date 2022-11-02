@@ -7,77 +7,106 @@ import Notification from './Notification';
 
 class App extends Component {
   //1. Статика
-  static defaultProps = {
-    initialvalue: 0,
-    inicialvisible: false,
-  };
+  // static defaultProps = {
+  //   initialvalue: 0,
+  //   // inicialvisible: false,
+  // };
 
   //2. Состояние
   state = {
-    valueGood: this.props.initialvalue,
-    valueNeutral: this.props.initialvalue,
-    valueBad: this.props.initialvalue,
-    valueTotal: this.props.initialvalue,
-    valuePercentage: this.props.initialvalue,
-    visible: this.props.inicialvisible,
-  };
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  
+   };
 
-  //  3. Кастомные методы
-  handlIncrementeGood = () => {
-    //     // Замена относительно исходного состояния
-    //     // this.setState({ value: 666})
+keys = Object.keys(this.state)
 
-    //     // Замена относительно текущего состояния
-    this.setState(prevState => ({
-      valueGood: prevState.valueGood + 1,
-      visible: !prevState.visible? !prevState.visible: prevState.visible,
-    }));
-  };
+visible = false 
 
-  handleIncrementNeutral = () => {
-    this.setState(prevState => ({
-      valueNeutral: prevState.valueNeutral + 1,
-      visible: !prevState.visible? !prevState.visible: prevState.visible ,
-    }));
-  };
+  // //  3. Кастомные методы
+  // handlIncrementeGood = () => {
+  //   //     // Замена относительно исходного состояния
+  //   //     // this.setState({ value: 666})
 
-  handleIncrementBad = () => {
-    this.setState(prevState => ({
-      valueBad: prevState.valueBad + 1,
-      visible: !prevState.visible? !prevState.visible: prevState.visible ,
-    }));
-  };
+  //   //     // Замена относительно текущего состояния
+  //   this.setState(prevState => ({
+  //     valueGood: prevState.good + 1,
+  //     visible: !prevState.inicialvisible? !prevState.inicialvisible: prevState.inicialvisible,
+  //   }));
+  // };
+
+  // handleIncrementNeutral = () => {
+  //   this.setState(prevState => ({
+  //     valueNeutral: prevState.neutral + 1,
+  //     visible: !prevState.inicialvisible? !prevState.inicialvisible: prevState.inicialvisible,
+  //   }));
+  // };
+
+  // handleIncrementBad = () => {
+  //   this.setState(prevState => ({
+  //     valueBad: prevState.bad + 1,
+  //     visible: !prevState.inicialvisible? !prevState.inicialvisible: prevState.inicialvisible,
+  //   }));
+  // };
+
+leaveFeedback = e => {
+  const comande = e.target.name
+
+  this.setState({
+    [comande]: this.state[comande] + 1,
+});
+};
+
+
+countTotalFeedback = () => {
+  const valueTotal = this.state.good + this.state.neutral + this.state.bad;
+  return valueTotal
+};
+
+countPositiveFeedbackPercentage = () => {
+
+   const valuePercentage = Math.ceil((this.state.good * 100) / this.countTotalFeedback());
+   return valuePercentage
+};
 
 
 
   // Рендер
 
   render() {
-    const valueTotal =
-      this.state.valueGood + this.state.valueNeutral + this.state.valueBad;
-    const valuePercentage = Math.ceil(
-      (this.state.valueGood * 100) / valueTotal
-    );
-    const { visible } = this.state
+
+
+
+    // const valueTotal =
+    //   this.state.good + this.state.neutral + this.state.bad;
+
+    // const valuePercentage = Math.ceil(
+    //   (this.state.good * 100) / valueTotal
+    // );
+  
+
+    // const options = Object.keys(this.state)
 
     return (
       <>
         <Section title="Please leave feedback:">
           <FeedbackOptions
-            onIncrementGood={this.handlIncrementeGood}
-            onIncrementNeutral={this.handleIncrementNeutral}
-            onIncrementBad={this.handleIncrementBad}
+               options={this.keys} onLeaveFeedback={this.leaveFeedback}
+            // onIncrementGood={this.handlIncrementeGood}
+            // onIncrementNeutral={this.handleIncrementNeutral}
+            // onIncrementBad={this.handleIncrementBad}
           />
         </Section>
 
         <Section title="Statistics:">
-        {visible ? (
+        {this.countTotalFeedback() !== 0 ? (
           <Statistics
-            valueGood={this.state.valueGood}
-            valueNeutral={this.state.valueNeutral}
-            valueBad={this.state.valueBad}
-            valueTotal={valueTotal}
-            valuePercentage={valuePercentage}
+            valueGood={this.state.good}
+            valueNeutral={this.state.neutral}
+            valueBad={this.state.bad}
+            valueTotal={this.countTotalFeedback()}
+            valuePercentage={this.countPositiveFeedbackPercentage()}
           />) : <Notification title="There is no feedback!!!"/>}
         </Section>
       </>

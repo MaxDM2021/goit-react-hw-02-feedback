@@ -21,3 +21,8 @@ cursor: pointer;
     background-color: ${p=>p.theme.colors.red};
 }
 `;
+
+
+export const StyleItem = styled.li`
+list-style: none;
+`
